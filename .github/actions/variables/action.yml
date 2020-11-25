@@ -1,0 +1,109 @@
+name: "Variables"
+description: "Set environment variables with defaults"
+
+inputs:
+  production:
+    description: "Production branches"
+    required: false
+    default: "main master"
+
+  staging:
+    description: "Staging branches"
+    required: false
+    default: "staging"
+
+  development:
+    description: "Development branches"
+    required: false
+    default: "develop"
+
+  SHA:
+    description: "Git short SHA for manually-triggered deploys"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set environment based on git branch
+      run: |
+        BRANCH=${GITHUB_REF##*/}
+        PROD_BRANCHES=( "${{ inputs.production }}" )
+        STAG_BRANCHES=( "${{ inputs.staging }}" )
+        DEV_BRANCHES=( "${{ inputs.development }}" )
+        echo "ENVIRONMENT=testing" >> $GITHUB_ENV
+        if [[ " ${PROD_BRANCHES[@]} " =~ " ${BRANCH} " ]]; then echo "ENVIRONMENT=production" >> $GITHUB_ENV; fi;
+        if [[ " ${STAG_BRANCHES[@]} " =~ " ${BRANCH} " ]]; then echo "ENVIRONMENT=staging" >> $GITHUB_ENV; fi;
+        if [[ " ${DEV_BRANCHES[@]} " =~ " ${BRANCH} " ]]; then echo "ENVIRONMENT=development" >> $GITHUB_ENV; fi;
+      shell: bash
+
+    - name: Load secrets
+      run: |
+        if [[ ${ENVIRONMENT} == "staging" ]]; then
+          echo "REGISTRY=${STAG_DOCKER_REGISTRY}" >> $GITHUB_ENV
+          echo "REGISTRY_USER=${STAG_DOCKER_REGISTRY_USER}" >> $GITHUB_ENV
+          echo "REGISTRY_TOKEN=${STAG_DOCKER_REGISTRY_TOKEN}" >> $GITHUB_ENV
+          echo "SSH_HOST=${STAG_SSH_HOST}" >> $GITHUB_ENV
+          echo "SSH_PORT=${STAG_SSH_PORT}" >> $GITHUB_ENV
+          echo "SSH_USER=${STAG_SSH_USER}" >> $GITHUB_ENV
+          echo "SSH_KEY=${STAG_SSH_KEY//$'\n'/'%0A'}" >> $GITHUB_ENV
+          echo "SSH_PATH=${STAG_SSH_PATH}" >> $GITHUB_ENV
+          echo "ENV_VARS=${STAG_ENV_VARS//$'\n'/'%0A'}" >> $GITHUB_ENV
+          echo "DOCKER_COMPOSE_UP_ARGS=${STAG_DOCKER_COMPOSE_UP_ARGS}" >> $GITHUB_ENV
+        elif [[ ${ENVIRONMENT} == "development" ]]; then
+          echo "REGISTRY=${DEV_DOCKER_REGISTRY}" >> $GITHUB_ENV
+          echo "REGISTRY_USER=${DEV_DOCKER_REGISTRY_USER}" >> $GITHUB_ENV
+          echo "REGISTRY_TOKEN=${DEV_DOCKER_REGISTRY_TOKEN}" >> $GITHUB_ENV
+          echo "SSH_HOST=${DEV_SSH_HOST}" >> $GITHUB_ENV
+          echo "SSH_PORT=${DEV_SSH_PORT}" >> $GITHUB_ENV
+          echo "SSH_USER=${DEV_SSH_USER}" >> $GITHUB_ENV
+          echo "SSH_KEY=${DEV_SSH_KEY//$'\n'/'%0A'}" >> $GITHUB_ENV
+          echo "SSH_PATH=${DEV_SSH_PATH}" >> $GITHUB_ENV
+          echo "ENV_VARS=${DEV_ENV_VARS//$'\n'/'%0A'}" >> $GITHUB_ENV
+          echo "DOCKER_COMPOSE_UP_ARGS=${DEV_DOCKER_COMPOSE_UP_ARGS}" >> $GITHUB_ENV
+        else
+          echo "REGISTRY=${PROD_DOCKER_REGISTRY}" >> $GITHUB_ENV
+          echo "REGISTRY_USER=${PROD_DOCKER_REGISTRY_USER}" >> $GITHUB_ENV
+          echo "REGISTRY_TOKEN=${PROD_DOCKER_REGISTRY_TOKEN}" >> $GITHUB_ENV
+          echo "SSH_HOST=${PROD_SSH_HOST}" >> $GITHUB_ENV
+          echo "SSH_PORT=${PROD_SSH_PORT}" >> $GITHUB_ENV
+          echo "SSH_USER=${PROD_SSH_USER}" >> $GITHUB_ENV
+          echo "SSH_KEY=${PROD_SSH_KEY//$'\n'/'%0A'}" >> $GITHUB_ENV
+          echo "SSH_PATH=${PROD_SSH_PATH}" >> $GITHUB_ENV
+          echo "ENV_VARS=${PROD_ENV_VARS//$'\n'/'%0A'}" >> $GITHUB_ENV
+          echo "DOCKER_COMPOSE_UP_ARGS=${PROD_DOCKER_COMPOSE_UP_ARGS}" >> $GITHUB_ENV
+        fi;
+      shell: bash
+
+    - id: vars
+      name: Set variable defaults
+      run: |
+        echo "REGISTRY=${REGISTRY:-docker.pkg.github.com}" >> $GITHUB_ENV
+        echo "REGISTRY_USER=${REGISTRY_USER:-${{github.actor}}}" >> $GITHUB_ENV
+        echo "SSH_PORT=${SSH_PORT:-22}" >> $GITHUB_ENV
+        echo "SSH_USER=${SSH_USER:-root}" >> $GITHUB_ENV
+        echo "SSH_PATH=${SSH_PATH:-./deploy/}" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Populate environment variables
+      run: |
+        INPUT_SHA=${{ inputs.SHA }}
+        REPO=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+        IMAGE_TAG=${INPUT_SHA:-${SHA}}
+        touch .env
+        ORIGINAL_VARS=`cat .env`
+        rm -f .env
+        echo "### Defaults ###" >> .env
+        echo "NODE_ENV=production" >> .env
+        echo "HOST_NAME=${SSH_HOST}" >> .env
+        echo "BACKEND_IMAGE=docker.pkg.github.com/${{ github.repository }}/${REPO}-backend" >> .env
+        echo "FRONTEND_IMAGE=docker.pkg.github.com/${{ github.repository }}/${REPO}-frontend" >> .env
+        echo "IMAGE_TAG=${IMAGE_TAG:0:7}" >> .env
+        echo "" >> .env
+        echo "${ORIGINAL_VARS}" >> .env
+        echo "" >> .env
+        echo "### Variables from Github Secrets ###" >> .env
+        echo "${ENV_VARS//'%0A'/$'\n'}" >> .env
+        echo "" >> .env
+      shell: bash
+      env:
+        SHA: ${{ github.sha }}

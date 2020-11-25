@@ -1,0 +1,90 @@
+name: CI/CD
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      SHA:
+        description: "Git Short SHA (Docker Image Tag)"
+        required: true
+
+env:
+  PROD_DOCKER_REGISTRY: ${{ secrets.PROD_DOCKER_REGISTRY }}
+  PROD_DOCKER_REGISTRY_USER: ${{ secrets.PROD_DOCKER_REGISTRY_USER }}
+  PROD_DOCKER_REGISTRY_TOKEN: ${{ secrets.PROD_DOCKER_REGISTRY_TOKEN }}
+  PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
+  PROD_SSH_PORT: ${{ secrets.PROD_SSH_PORT }}
+  PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
+  PROD_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+  PROD_SSH_PATH: ${{ secrets.PROD_SSH_PATH }}
+  PROD_ENV_VARS: ${{ secrets.PROD_ENV_VARS }}
+  PROD_DOCKER_COMPOSE_UP_ARGS: ${{ secrets.PROD_DOCKER_COMPOSE_UP_ARGS }}
+
+  STAG_DOCKER_REGISTRY: ${{ secrets.STAG_DOCKER_REGISTRY }}
+  STAG_DOCKER_REGISTRY_USER: ${{ secrets.STAG_DOCKER_REGISTRY_USER }}
+  STAG_DOCKER_REGISTRY_TOKEN: ${{ secrets.STAG_DOCKER_REGISTRY_TOKEN }}
+  STAG_SSH_HOST: ${{ secrets.STAG_SSH_HOST }}
+  STAG_SSH_PORT: ${{ secrets.STAG_SSH_PORT }}
+  STAG_SSH_USER: ${{ secrets.STAG_SSH_USER }}
+  STAG_SSH_KEY: ${{ secrets.STAG_SSH_KEY }}
+  STAG_SSH_PATH: ${{ secrets.STAG_SSH_PATH }}
+  STAG_ENV_VARS: ${{ secrets.STAG_ENV_VARS }}
+  STAG_DOCKER_COMPOSE_UP_ARGS: ${{ secrets.STAG_DOCKER_COMPOSE_UP_ARGS }}
+
+  DEV_DOCKER_REGISTRY: ${{ secrets.DEV_DOCKER_REGISTRY }}
+  DEV_DOCKER_REGISTRY_USER: ${{ secrets.DEV_DOCKER_REGISTRY_USER }}
+  DEV_DOCKER_REGISTRY_TOKEN: ${{ secrets.DEV_DOCKER_REGISTRY_TOKEN }}
+  DEV_SSH_HOST: ${{ secrets.DEV_SSH_HOST }}
+  DEV_SSH_PORT: ${{ secrets.DEV_SSH_PORT }}
+  DEV_SSH_USER: ${{ secrets.DEV_SSH_USER }}
+  DEV_SSH_KEY: ${{ secrets.DEV_SSH_KEY }}
+  DEV_SSH_PATH: ${{ secrets.DEV_SSH_PATH }}
+  DEV_ENV_VARS: ${{ secrets.DEV_ENV_VARS }}
+  DEV_DOCKER_COMPOSE_UP_ARGS: ${{ secrets.DEV_DOCKER_COMPOSE_UP_ARGS }}
+
+jobs:
+  CI-CD:
+    name: CI/CD
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]') &&
+      !contains(github.event.head_commit.message, '[ci skip]')"
+    steps:
+      - name: Checkout the branch
+        if: github.event.inputs.SHA == ''
+        uses: actions/checkout@v2
+
+      - name: Checkout specific git commit
+        if: github.event.inputs.SHA != ''
+        uses: actions/checkout@v1
+        with:
+          ref: ${{ github.event.inputs.SHA }}
+
+      - name: Load environment variables
+        id: vars
+        uses: ./.github/actions/variables
+        with:
+          production: "main master"
+          staging: "staging"
+          development: "develop"
+          SHA: ${{ github.event.inputs.SHA }}
+
+      - name: Build
+        if: github.event.inputs.SHA == ''
+        uses: ./.github/actions/build
+
+      - name: Test
+        if: github.event.inputs.SHA == ''
+        uses: ./.github/actions/test
+
+      - name: Push
+        if: github.event.inputs.SHA == '' &&
+          contains('production staging development', env.ENVIRONMENT) &&
+          env.REGISTRY_TOKEN != ''
+        uses: ./.github/actions/push
+
+      - name: Deploy
+        if: contains('production staging development', env.ENVIRONMENT) &&
+          env.REGISTRY_TOKEN != '' &&
+          env.SSH_HOST != '' && env.SSH_KEY != ''
+        uses: ./.github/actions/deploy

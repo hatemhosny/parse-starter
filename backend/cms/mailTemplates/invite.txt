@@ -1,0 +1,6 @@
+Hi,
+
+Your friend {{emailSelf}} invites you to join {{siteName}}.
+
+Accept invite:
+{{link}}

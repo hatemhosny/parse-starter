@@ -1,0 +1,6 @@
+Hi {{username}},
+
+Thanks for signing up!
+Please confirm your account by clicking on the link below.
+
+{{link}}

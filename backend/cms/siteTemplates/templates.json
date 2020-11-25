@@ -1,0 +1,1450 @@
+[
+  {
+    "name": "Blog",
+    "description": "The template for blog.",
+    "icon": "blog.png",
+    "models": [
+      {
+        "name": "Author",
+        "nameId": "Author",
+        "description": "",
+        "color": "rgba(187, 34, 230, 1)",
+        "fields": [
+          {
+            "name": "Name",
+            "nameId": "Name",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(16, 178, 99, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Profile Photo",
+            "nameId": "Profile_Photo",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(3, 22, 230, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Biography",
+            "nameId": "Biography",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(245, 200, 30, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 2,
+            "validations": null
+          },
+          {
+            "name": "Twitter Handle",
+            "nameId": "Twitter_Handle",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(64, 64, 230, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 3,
+            "validations": null
+          }
+        ]
+      },
+      {
+        "name": "Post",
+        "nameId": "Post",
+        "description": "",
+        "color": "rgba(210, 230, 8, 1)",
+        "fields": [
+          {
+            "name": "Title",
+            "nameId": "Title",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(255, 32, 89, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Slug",
+            "nameId": "Slug",
+            "type": "Short Text",
+            "appearance": "Slug",
+            "color": "rgba(76, 144, 8, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 1,
+            "validations": null
+          },
+          {
+            "name": "Author",
+            "nameId": "Author",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(1, 34, 54, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 2,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Author"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Thumb Image",
+            "nameId": "Thumb_Image",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(8, 233, 120, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 3,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Banner Image",
+            "nameId": "Banner_Image",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(58, 96, 145, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 4,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(189, 217, 94, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 5,
+            "validations": null
+          },
+          {
+            "name": "Body",
+            "nameId": "Body",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(162, 174, 249, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 6,
+            "validations": null
+          },
+          {
+            "name": "Publish Date",
+            "nameId": "Publish_Date",
+            "type": "Date/time",
+            "appearance": "Date & time",
+            "color": "rgba(241, 11, 64, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 7,
+            "validations": null
+          },
+          {
+            "name": "Tags",
+            "nameId": "Tags",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(116, 114, 108, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "order": 8,
+            "validations": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Knowledge Base",
+    "description": "The template for knowledge base.",
+    "icon": "knowledge.png",
+    "models": [
+      {
+        "name": "Author",
+        "nameId": "Author",
+        "description": "",
+        "color": "rgba(244, 31, 177, 1)",
+        "fields": [
+          {
+            "name": "Name",
+            "nameId": "Name",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(27, 80, 58, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Profile Photo",
+            "nameId": "Profile_Photo",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(42, 202, 65, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Biography",
+            "nameId": "Biography",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(109, 77, 248, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 2,
+            "validations": null
+          },
+          {
+            "name": "Twitter Handle",
+            "nameId": "Twitter_Handle",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(108, 128, 3, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 3,
+            "validations": null
+          }
+        ]
+      },
+      {
+        "name": "Article",
+        "nameId": "Article",
+        "description": "",
+        "color": "rgba(66, 134, 177, 1)",
+        "fields": [
+          {
+            "name": "Title",
+            "nameId": "Title",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(212, 144, 167, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Slug",
+            "nameId": "Slug",
+            "type": "Short Text",
+            "appearance": "Slug",
+            "color": "rgba(143, 32, 133, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 1,
+            "validations": null
+          },
+          {
+            "name": "Author",
+            "nameId": "Author",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(153, 60, 209, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 2,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Author"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Thumb Image",
+            "nameId": "Thumb_Image",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(187, 244, 159, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 3,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Banner Image",
+            "nameId": "Banner_Image",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(221, 206, 126, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 4,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(248, 240, 138, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 5,
+            "validations": null
+          },
+          {
+            "name": "Body",
+            "nameId": "Body",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(148, 57, 100, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 6,
+            "validations": null
+          },
+          {
+            "name": "Publish Date",
+            "nameId": "Publish_Date",
+            "type": "Date/time",
+            "appearance": "Date & time",
+            "color": "rgba(149, 203, 177, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 7,
+            "validations": null
+          },
+          {
+            "name": "Tags",
+            "nameId": "Tags",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(211, 169, 128, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "order": 8,
+            "validations": null
+          },
+          {
+            "name": "Categories",
+            "nameId": "Categories",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(228, 149, 237, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "order": 9,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Category"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Category",
+        "nameId": "Category",
+        "description": "",
+        "color": "rgba(61, 166, 37, 1)",
+        "fields": [
+          {
+            "name": "Title",
+            "nameId": "Title",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(93, 74, 112, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Icon",
+            "nameId": "Icon",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(105, 88, 155, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(173, 51, 112, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "order": 2,
+            "validations": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Photo Gallery",
+    "description": "The template for photo gallery.",
+    "icon": "gallery.png",
+    "models": [
+      {
+        "name": "Author",
+        "nameId": "Author",
+        "description": "",
+        "color": "rgba(4, 204, 67, 1)",
+        "fields": [
+          {
+            "name": "Name",
+            "nameId": "Name",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(254, 55, 203, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Progile Photo",
+            "nameId": "Progile_Photo",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(100, 214, 132, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Biography",
+            "nameId": "Biography",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(242, 129, 214, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 2,
+            "validations": null
+          },
+          {
+            "name": "Twitter Handle",
+            "nameId": "Twitter_Handle",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(57, 216, 69, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 3,
+            "validations": null
+          }
+        ]
+      },
+      {
+        "name": "Image",
+        "nameId": "Image",
+        "description": "",
+        "color": "rgba(37, 105, 84, 1)",
+        "fields": [
+          {
+            "name": "Title",
+            "nameId": "Title",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(169, 184, 60, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Photo",
+            "nameId": "Photo",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(237, 19, 114, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Author",
+            "nameId": "Author",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(94, 140, 238, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 2,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Author"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(188, 92, 58, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 3,
+            "validations": null
+          },
+          {
+            "name": "Credits",
+            "nameId": "Credits",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(217, 126, 103, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 4,
+            "validations": null
+          }
+        ]
+      },
+      {
+        "name": "Gallery",
+        "nameId": "Gallery",
+        "description": "",
+        "color": "rgba(236, 62, 101, 1)",
+        "fields": [
+          {
+            "name": "Title",
+            "nameId": "Title",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(186, 151, 108, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Slug",
+            "nameId": "Slug",
+            "type": "Short Text",
+            "appearance": "Slug",
+            "color": "rgba(52, 93, 87, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 1,
+            "validations": null
+          },
+          {
+            "name": "Author",
+            "nameId": "Author",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(21, 139, 191, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 2,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Author"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Cover Image",
+            "nameId": "Cover_Image",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(179, 35, 128, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 3,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Images",
+            "nameId": "Images",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(123, 93, 49, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 4,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(65, 62, 3, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 5,
+            "validations": null
+          },
+          {
+            "name": "Tags",
+            "nameId": "Tags",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(162, 6, 95, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 6,
+            "validations": null
+          },
+          {
+            "name": "Date",
+            "nameId": "Date",
+            "type": "Date/time",
+            "appearance": "Date & time",
+            "color": "rgba(206, 60, 35, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 7,
+            "validations": null
+          },
+          {
+            "name": "Location",
+            "nameId": "Location",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(74, 144, 26, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 8,
+            "validations": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Product Catalogue",
+    "description": "The template for product catalogue.",
+    "icon": "products.png",
+    "models": [
+      {
+        "name": "Brand",
+        "nameId": "Brand",
+        "description": "",
+        "color": "rgba(118, 64, 185, 1)",
+        "fields": [
+          {
+            "name": "Name",
+            "nameId": "Name",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(22, 135, 76, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Logo",
+            "nameId": "Logo",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(195, 204, 139, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(140, 79, 152, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 2,
+            "validations": null
+          },
+          {
+            "name": "Website",
+            "nameId": "Website",
+            "type": "Short Text",
+            "appearance": "URL",
+            "color": "rgba(13, 90, 220, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 3,
+            "validations": null
+          },
+          {
+            "name": "Email",
+            "nameId": "Email",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(255, 173, 143, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 4,
+            "validations": null
+          },
+          {
+            "name": "Phone Number",
+            "nameId": "Phone_Number",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(235, 45, 248, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 5,
+            "validations": null
+          },
+          {
+            "name": "Twitter Handle",
+            "nameId": "Twitter_Handle",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(100, 129, 165, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 6,
+            "validations": null
+          }
+        ]
+      },
+      {
+        "name": "Category",
+        "nameId": "Category",
+        "description": "",
+        "color": "rgba(219, 247, 152, 1)",
+        "fields": [
+          {
+            "name": "Title",
+            "nameId": "Title",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(128, 242, 36, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Icon",
+            "nameId": "Icon",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(134, 131, 232, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 1,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(242, 209, 218, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 2,
+            "validations": null
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "nameId": "Product",
+        "description": "",
+        "color": "rgba(185, 56, 212, 1)",
+        "fields": [
+          {
+            "name": "Name",
+            "nameId": "Name",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(13, 141, 142, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": true,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 0,
+            "validations": null
+          },
+          {
+            "name": "Slug",
+            "nameId": "Slug",
+            "type": "Short Text",
+            "appearance": "Slug",
+            "color": "rgba(125, 42, 81, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 1,
+            "validations": null
+          },
+          {
+            "name": "Brand",
+            "nameId": "Brand",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(214, 38, 88, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 2,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Brand"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Description",
+            "nameId": "Description",
+            "type": "Long Text",
+            "appearance": "Markdown",
+            "color": "rgba(3, 33, 249, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": true,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 3,
+            "validations": null
+          },
+          {
+            "name": "Categories",
+            "nameId": "Categories",
+            "type": "Reference",
+            "appearance": "Reference",
+            "color": "rgba(50, 140, 103, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 4,
+            "validations": {
+              "models": {
+                "active": true,
+                "modelsList": [
+                  "Category"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Images",
+            "nameId": "Images",
+            "type": "Media",
+            "appearance": "Media",
+            "color": "rgba(255, 230, 50, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 5,
+            "validations": {
+              "fileTypes": {
+                "active": true,
+                "types": [
+                  "Image"
+                ],
+                "errorMsg": "",
+                "isError": false
+              }
+            }
+          },
+          {
+            "name": "Tags",
+            "nameId": "Tags",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(224, 124, 237, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 6,
+            "validations": null
+          },
+          {
+            "name": "Price",
+            "nameId": "Price",
+            "type": "Number",
+            "appearance": "Decimal",
+            "color": "rgba(98, 140, 144, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 7,
+            "validations": null
+          },
+          {
+            "name": "Quantity Options",
+            "nameId": "Quantity_Options",
+            "type": "Number Int",
+            "appearance": "Decimal",
+            "color": "rgba(87, 61, 120, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": true,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 8,
+            "validations": null
+          },
+          {
+            "name": "SKU",
+            "nameId": "SKU",
+            "type": "Short Text",
+            "appearance": "Single line",
+            "color": "rgba(35, 94, 57, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 9,
+            "validations": null
+          },
+          {
+            "name": "Current Stock",
+            "nameId": "Current_Stock",
+            "type": "Number Int",
+            "appearance": "Decimal",
+            "color": "rgba(185, 194, 50, 1)",
+            "boolTextYes": "",
+            "boolTextNo": "",
+            "validValues": [],
+            "isRequired": false,
+            "isTitle": false,
+            "isList": false,
+            "isDisabled": false,
+            "isUnique": false,
+            "order": 10,
+            "validations": null
+          }
+        ]
+      }
+    ]
+  }
+]

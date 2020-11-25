@@ -1,0 +1,12 @@
+name: "Build"
+description: "Build docker images"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build docker images
+      run: docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1
+      shell: bash
+      env:
+        DOCKER_BUILDKIT: "1"
+        COMPOSE_DOCKER_CLI_BUILD: "1"

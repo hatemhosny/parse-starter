@@ -1,0 +1,20 @@
+{
+  "name": "parse-starter",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "docker-compose up",
+    "up": "docker-compose up",
+    "up-detached": "docker-compose up -d",
+    "down": "docker-compose down",
+    "docker-build": "docker-compose build",
+    "frontend-shell": "docker-compose up -d && docker-compose exec frontend bash",
+    "backend-shell": "docker-compose up -d && docker-compose exec backend bash",
+    "frontend-test": "docker-compose run --no-deps frontend npm run ci-test",
+    "backend-test": "docker-compose run --no-deps backend npm run ci-test",
+    "test": "npm run frontend-test && npm run backend-test",
+    "clean": "docker system prune"
+  }
+}

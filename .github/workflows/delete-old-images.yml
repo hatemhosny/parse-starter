@@ -1,0 +1,19 @@
+name: Delete old docker images
+on:
+  # push:
+  schedule:
+    - cron: "0 8 * * *"
+
+env:
+  GITHUB_TOKEN: ${{ secrets.PROD_DOCKER_REGISTRY_TOKEN }}
+
+jobs:
+  delete-old-images:
+    name: Delete old docker images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old docker images
+        if: env.GITHUB_TOKEN != ''
+        uses: navikt/remove-package-versions@24c0c98
+        with:
+          keep_versions: 10

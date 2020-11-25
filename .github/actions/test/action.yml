@@ -1,0 +1,23 @@
+name: "Test"
+description: "Run tests"
+
+inputs:
+  FRONTEND_NPM_SCRIPT:
+    description: "npm script to run on frontend container"
+    required: true
+    default: "ci-test"
+  BACKEND_NPM_SCRIPT:
+    description: "npm script to run on backend container"
+    required: true
+    default: "ci-test"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Test frontend
+      run: docker-compose run --no-deps frontend npm run ${{ inputs.FRONTEND_NPM_SCRIPT }}
+      shell: bash
+
+    - name: Test backend
+      run: docker-compose run --no-deps backend npm run ${{ inputs.BACKEND_NPM_SCRIPT }}
+      shell: bash

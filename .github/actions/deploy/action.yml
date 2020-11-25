@@ -1,0 +1,37 @@
+name: "Deploy"
+description: "Deploy via SSH"
+
+runs:
+  using: "composite"
+  steps:
+    - name: SSH config
+      run: |
+        mkdir -p ~/.ssh
+        echo "${SSH_KEY//'%0A'/$'\n'}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ env.SSH_HOST }} >> ~/.ssh/known_hosts
+        echo "Host deploy" >> ~/.ssh/config
+        echo "  HostName ${{ env.SSH_HOST }}" >> ~/.ssh/config
+        echo "  User ${{ env.SSH_USER }}" >> ~/.ssh/config
+        echo "  Port ${{ env.SSH_PORT }}" >> ~/.ssh/config
+        chmod 600 ~/.ssh/config
+      shell: bash
+
+    - name: Copy files to remote server
+      run: |
+        ssh deploy mkdir -p "${{ env.SSH_PATH }}/.empty"
+        rsync --exclude '.git' --exclude 'data' -azP ${PWD}/ deploy:${{ env.SSH_PATH }}
+      shell: bash
+
+    - name: Run docker-compose over SSH
+      run: ssh deploy '
+        echo "${{ env.REGISTRY_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ env.REGISTRY_USER }} --password-stdin &&
+        cd ${{ env.SSH_PATH }} &&
+        docker system prune --volumes --force &&
+        docker-compose pull &&
+        docker-compose down --remove-orphans &&
+        docker-compose up --no-build -d ${{ env.DOCKER_COMPOSE_UP_ARGS }} &&
+        rm -f .env'
+      shell: bash

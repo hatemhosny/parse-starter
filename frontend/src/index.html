@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Todo List Sample App</title>
+    <!-- 
+      <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" 
+        crossorigin="anonymous">
+     -->
+    <link
+      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      #todos-container li,
+      #todos-container input[type="checkbox"],
+      #todos-container label {
+        cursor: pointer;
+      }
+      #todos-container li.loading,
+      #todos-container li.empty {
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="py-4 text-center">
+        <h2>Todo List</h2>
+        <p class="lead">Realtime todo app using Parse JS SDK.</p>
+      </div>
+
+      <div class="row">
+        <div class="mx-auto col-md-6 order-md-2 mb-4">
+          <div class="py-4 text-center">
+            <form id="todo-form" class="card p-2" onsubmit="return false">
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="todo-input"
+                  class="form-control"
+                  placeholder="New todo"
+                />
+                <div class="input-group-append">
+                  <button type="button" id="add-btn" class="btn btn-secondary">
+                    Add Todo
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your Todos</span>
+            <span class="badge badge-secondary badge-pill">
+              <div
+                class="spinner-border spinner-border-sm text-light"
+                style="width: 1rem; height: 1rem"
+                role="status"
+                id="loading-indicator"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div id="todos-count"></div>
+            </span>
+          </h4>
+          <ul id="todos-container" class="list-group mb-3">
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed loading"
+            >
+              <div>Loading...</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="my-3 pt-3 text-muted text-center text-small">
+        <p class="mb-1">Parse Starter</p>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a
+              href="https://github.com/hatemhosny/parse-starter"
+              target="_blank"
+              >Github</a
+            >
+          </li>
+        </ul>
+      </footer>
+    </div>
+    <!-- <script src="https://unpkg.com/parse@2.17/dist/parse.min.js"></script> -->
+    <script src="../node_modules/parse/dist/parse.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

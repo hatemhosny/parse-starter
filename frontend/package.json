@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "per-env",
+    "start:development": "parcel src/index.html --global Parse --out-dir .cache/tmp --hmr-port=$HMR_PORT",
+    "start:production": "npm run build",
+    "build": "rimraf dist/* && parcel build src/index.html --global Parse",
+    "test": "echo \"No test specified\"",
+    "ci-test": "npm run test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "parse": "^2.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5",
+    "parcel-bundler": "^1.12.4",
+    "per-env": "^1.0.2",
+    "rimraf": "^3.0.2"
+  }
+}
