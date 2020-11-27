@@ -564,6 +564,8 @@ Re-deploys can also be manually triggered (e.g. reverting to a previous build) b
 
 Please note that github actions and github packages have limits for free accounts and are paid services. Check [github pricing](https://github.com/pricing) for details.
 
+If you want to avoid running the CI/CD workflow on a commit (e.g. after updating a markdown file), include `[skip ci]` or `[ci skip]` to the commit message.
+
 To limit usage of github packages storage in private repos, only the latest 10 versions of each docker image are kept, and older ones are deleted. This behaviour [can be configured](./.github/workflows/delete-old-images.yml). Packages for public repos are free and [cannot be deleted](https://docs.github.com/en/free-pro-team@latest/packages/publishing-and-managing-packages/deleting-a-package#about-public-package-deletion).
 
 ### Server Setup
