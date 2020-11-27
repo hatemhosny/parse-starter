@@ -86,8 +86,9 @@ runs:
 
     - name: Populate environment variables
       run: |
-        INPUT_SHA=${{ inputs.SHA }}
         REPO=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+        IMAGE_PREFIX=$(echo "docker.pkg.github.com/${{ github.repository }}/${REPO}" | tr '[:upper:]' '[:lower:]')
+        INPUT_SHA=${{ inputs.SHA }}
         IMAGE_TAG=${INPUT_SHA:-${SHA}}
         touch .env
         ORIGINAL_VARS=`cat .env`
@@ -95,8 +96,8 @@ runs:
         echo "### Defaults ###" >> .env
         echo "NODE_ENV=production" >> .env
         echo "HOST_NAME=${SSH_HOST}" >> .env
-        echo "BACKEND_IMAGE=docker.pkg.github.com/${{ github.repository }}/${REPO}-backend" >> .env
-        echo "FRONTEND_IMAGE=docker.pkg.github.com/${{ github.repository }}/${REPO}-frontend" >> .env
+        echo "BACKEND_IMAGE=${IMAGE_PREFIX}-backend" >> .env
+        echo "FRONTEND_IMAGE=${IMAGE_PREFIX}-frontend" >> .env
         echo "IMAGE_TAG=${IMAGE_TAG:0:7}" >> .env
         echo "" >> .env
         echo "${ORIGINAL_VARS}" >> .env
