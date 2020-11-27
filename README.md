@@ -1,5 +1,7 @@
 # A powerful backend ready for your next app 🚀 <!-- omit in toc -->
 
+![CI/CD](https://github.com/hatemhosny/parse-starter/workflows/CI/CD/badge.svg)
+
 This is a starter template with a feature-rich ready-to-use backend that works out of the box for local development and can be easily deployed.
 
 You get a fully functional backend so that you can focus on what matters most: your app!
